@@ -2106,3 +2106,18 @@ function defineBigIntMethod (fn) {
 function BufferBigIntNotDefined () {
   throw new Error('BigInt not supported')
 }
+
+if(!Buffer.prototype.reverse) {
+  // console.log('使用自定义 reverse 函数');
+  Buffer.prototype.reverse = function reverse () {
+    var buffer = new Buffer(this.length)
+
+    for (var i = 0, j = this.length - 1; i <= j; ++i, --j) {
+      buffer[i] = this[j]
+      buffer[j] = this[i]
+    }
+
+    return buffer
+  }
+}
+
